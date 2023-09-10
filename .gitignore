@@ -1,3 +1,9 @@
+# Code configuration files
+.vscode/
+
+# Code format
+.clang-format
+
 # Prerequisites
 *.d
 
