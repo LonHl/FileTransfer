@@ -11,9 +11,9 @@ int main(int argc, char *argv[])
 {
 	// printf("size : %d\n",sizeof(FILE_INFO));
 	// ERRP(argc < 2, "参数过少", goto ERR1);
-	if (argc == 1) {
-		command_mode();
-	}
+	// if (argc == 1) {
+	// 	command_mode();
+	// }
 	
 	if (!strcmp(argv[1], "-r")) {
 		ERRP(argc < 4, "参数过少", goto ERR1);

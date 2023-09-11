@@ -1,5 +1,5 @@
 #include "send_file.h"
-#include "get_file_info.h"
+
 // 发送文件
 int send_file(const char *path)
 {
@@ -58,7 +58,15 @@ int send_file(const char *path)
 	// 发送文件信息
 	write(connfd, &info, sizeof(info));
 
-	int fd = open(path, O_RDONLY);
+	// 加密文件
+	char key[65];
+	get_key(key, sizeof(key));
+	char out_path[512];
+	system("[ -d /tmp/send ] || mkdir -p /tmp/send");
+	sprintf(out_path, "/tmp/send/%s", info.name);
+	encrypt_file(path, out_path, key, info.sha256);
+
+	int fd = open(out_path, O_RDONLY);
 	if (fd == -1) {
 		perror("open error");
 		close(connfd);

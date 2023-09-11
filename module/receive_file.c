@@ -41,10 +41,12 @@ int receive_file(const char *ipv4, const char *dir)
 
 	FILE_INFO info;
 	read(sfd, &info, sizeof(info));
-	// 切换到指定目录
-	chdir(dir);
+	
+	char in_path[512];
+	system("[ -d /tmp/receive ] || mkdir /tmp/receive");
+	sprintf(in_path, "/tmp/receive/%s", info.name);
 	// 打开文件
-	int fd = open(info.name, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	int fd = open(in_path, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1) {
 		perror("open error");
 		return -1;
@@ -72,7 +74,14 @@ int receive_file(const char *ipv4, const char *dir)
 	}
 
 	close(sfd);
+	close(fd);
 
+	// 文件解密
+	char key[65];
+	get_key(key, sizeof(key));
+	
+	chdir(dir);
+	decrypt_file(in_path,info.name,key,info.sha256);
 	char sha256_buf[65];
 	// 计算接收到的文件的SHA256哈希值
 	get_sha256(info.name, sha256_buf);

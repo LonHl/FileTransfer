@@ -12,6 +12,8 @@
 #include "share.h"
 #include "errp.h"
 #include "get_sha256.h"
+#include "decrypt_file.h"
+#include "get_key.h"
 
 // 接收文件
 int receive_file(const char *ipv4, const char *dir);

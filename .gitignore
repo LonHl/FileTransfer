@@ -4,6 +4,9 @@
 # Code format
 .clang-format
 
+# Key
+*.key
+
 # Prerequisites
 *.d
 

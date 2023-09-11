@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "share.h"
+#include "get_key.h"
 #include "receive_file.h"
 #include "send_file.h"
 

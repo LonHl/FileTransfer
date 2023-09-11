@@ -11,6 +11,9 @@
 #include <sys/mman.h>
 #include "share.h"
 #include "errp.h"
+#include "get_file_info.h"
+#include "encrypt_file.h"
+#include "get_key.h"
 // 发送文件
 int send_file(const char *path);
 
